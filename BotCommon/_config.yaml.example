@@ -1,0 +1,6 @@
+﻿# Bot token
+bot_token: ""
+
+bot_admin_id: 
+
+db_connection_string: ""

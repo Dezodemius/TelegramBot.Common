@@ -1,8 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotCommon", "BotCommon\BotCommon.csproj", "{7960D7FA-0FF7-4475-ABEC-C4F290112978}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotCommon.Tests", "BotCommon.Tests\BotCommon.Tests.csproj", "{28F39EE4-7783-4649-B9EC-6B207D8DEE05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotWorkerService", "BotWorkerService\BotWorkerService.csproj", "{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7960D7FA-0FF7-4475-ABEC-C4F290112978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7960D7FA-0FF7-4475-ABEC-C4F290112978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7960D7FA-0FF7-4475-ABEC-C4F290112978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7960D7FA-0FF7-4475-ABEC-C4F290112978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F39EE4-7783-4649-B9EC-6B207D8DEE05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F39EE4-7783-4649-B9EC-6B207D8DEE05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F39EE4-7783-4649-B9EC-6B207D8DEE05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F39EE4-7783-4649-B9EC-6B207D8DEE05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
