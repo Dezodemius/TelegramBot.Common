@@ -3,7 +3,7 @@ using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace BotCommon;
+namespace BotCommon.ConfigManager;
 
 /// <summary>
 /// Bot configuration manager.
@@ -15,7 +15,7 @@ public class BotConfigManager
   /// <summary>
   /// Bot configuration filename.
   /// </summary>
-  public const string BotConfigFileName = "_config.yaml";
+  private const string BotConfigFileName = "_config.yaml";
 
   #endregion
 
@@ -42,9 +42,9 @@ public class BotConfigManager
   private static IDeserializer BuildDeserializer()
   {
     return new DeserializerBuilder()
-        .WithNamingConvention(UnderscoredNamingConvention.Instance)
-        .WithDuplicateKeyChecking()
-        .Build();
+      .WithNamingConvention(UnderscoredNamingConvention.Instance)
+      .WithDuplicateKeyChecking()
+      .Build();
   }
 
   #endregion
@@ -70,7 +70,7 @@ public class BotConfigManager
   /// Constructor.
   /// </summary>
   public BotConfigManager()
-      : this(File.OpenRead(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, BotConfigFileName)))
+    : this(File.OpenRead(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, BotConfigFileName)))
   {
   }
 

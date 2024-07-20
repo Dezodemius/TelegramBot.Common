@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Telegram.Bot.Types;
 
 namespace BotCommon.Repository;
 
-public class UserDbContext : DefaultDbContext<BotUser>
+/// <summary>
+/// 
+/// </summary>
+public class UserDbContext 
+  : DefaultDbContext<BotUser>
 {
   public DbSet<BotUser> BotUsers { get; set; }
 
@@ -50,36 +51,3 @@ public class UserDbContext : DefaultDbContext<BotUser>
   }
 }
 
-public class BotUser
-{
-  [Key]
-  public long Id { get; set; }
-  public string Username { get; set; }
-  public string FirstName { get; set; }
-  public string LastName { get; set; }
-  public string UserLanguage { get; set; }
-  public DateTime FirstMeet { get; set; }
-
-  public BotUser()
-  {
-  }
-
-  public BotUser(User user)
-  {
-    this.Id = user.Id;
-    this.LastName = user.LastName;
-    this.FirstName = user.FirstName;
-    this.Username= user.Username;
-    this.FirstMeet = DateTime.Now;
-  }
-  
-  public BotUser(long id, string username, string firstName, string lastName, string userLanguage)
-  {
-    this.Id = id;
-    this.Username = username;
-    this.FirstName = firstName;
-    this.LastName = lastName;
-    this.UserLanguage = userLanguage;
-    this.FirstMeet = DateTime.Now;
-  }
-}

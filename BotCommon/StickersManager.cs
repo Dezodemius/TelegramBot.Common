@@ -2,7 +2,7 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace HalloweenDirectumBot;
+namespace BotCommon;
 
 public static class StickersManager
 {

@@ -1,53 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
-using BotCommon.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BotCommon.Broadcast;
 
-public class BroadcastMessageDbContext : DbContext
+/// <summary>
+/// Broadcasting message DB context.
+/// </summary>
+public class BroadcastMessageDbContext 
+  : DbContext
 {
-  private static readonly object padlock = new object();
-  private static volatile BroadcastMessageDbContext instance;
-  private static Lazy<BroadcastMessageDbContext> lazy = new(() => new BroadcastMessageDbContext());
+  #region Fields & props
 
+  /// <summary>
+  /// Lock object.
+  /// </summary>
+  private static readonly object _padlock = new object();
+  
+  /// <summary>
+  /// Lazy object.
+  /// </summary>
+  private static readonly Lazy<BroadcastMessageDbContext> _lazy = new(() => new BroadcastMessageDbContext());
+
+  private static volatile BroadcastMessageDbContext _instance;
+
+  /// <summary>
+  /// Singleton instance.
+  /// </summary>
   public static BroadcastMessageDbContext Instance
   {
     get
     {
-      if (instance == null)
+      if (_instance != null) 
+        return _instance;
+      lock (_padlock)
       {
-        lock (padlock)
-        {
-          if (instance == null)
-          {
-            instance = lazy.Value;
-          }
-        }
+        _instance = _instance ?? _lazy.Value;
       }
-      return instance;
+      return _instance;
     }
   } 
 
   public DbSet<BroadcastMessageUser> BroadcastMessageUsers { get; set; }
 
-  public void InitBroadcastUsers(IEnumerable<BotUser> users)
-  {
-    foreach (var botUser in users)
-    {
-      this.BroadcastMessageUsers.Add(new BroadcastMessageUser(botUser.Id, DateTime.MinValue, false, false));
-    }
+  #endregion
 
-    this.SaveChanges();
-  }
-  
+  #region Base
+
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
     optionsBuilder.UseSqlite("Filename=broadcast.db");
   }
 
+  #endregion
+
+  #region Constructors
+  
   public BroadcastMessageDbContext()
   {
     Database.EnsureCreated();
@@ -56,4 +65,6 @@ public class BroadcastMessageDbContext : DbContext
     if (!creator.Exists())
       creator.CreateTables();
   }
+
+  #endregion
 }

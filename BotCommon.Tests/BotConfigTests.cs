@@ -1,5 +1,6 @@
 using System.IO;
 using System.Text;
+using BotCommon.ConfigManager;
 using NUnit.Framework;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;

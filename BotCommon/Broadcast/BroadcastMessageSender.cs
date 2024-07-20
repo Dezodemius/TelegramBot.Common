@@ -13,10 +13,28 @@ using File = System.IO.File;
 
 namespace BotCommon.Broadcast;
 
+/// <summary>
+/// Broadcast messages sender.
+/// </summary>
 public static class BroadcastMessageSender
 {
+  #region Fields & props
+
+  /// <summary>
+  /// Broadcast operation timeout.
+  /// </summary>
   private static readonly TimeSpan BroadcastTimeout = TimeSpan.FromSeconds(5);
 
+  #endregion
+
+  #region Methods
+
+  /// <summary>
+  /// Broadcast message to users.
+  /// </summary>
+  /// <param name="botClient">Telegram bot client.</param>
+  /// <param name="users">List of users.</param>
+  /// <param name="message">Message to broadcast.</param>
   public static async void BroadcastMessage(
     ITelegramBotClient botClient, 
     IEnumerable<BotUser> users, 
@@ -74,6 +92,13 @@ public static class BroadcastMessageSender
     LogManager.GetCurrentClassLogger().Debug("BROADCAST COMPLETED");
   }
   
+  /// <summary>
+  /// Broadcast message with photo to users.
+  /// </summary>
+  /// <param name="botClient">Telegram bot client.</param>
+  /// <param name="users">List of users.</param>
+  /// <param name="message">Message with photo to broadcast.</param>
+  /// <param name="photoPath">Photo from message.</param>
   public static async void BroadcastMessageWithPhoto(
     ITelegramBotClient botClient, 
     IEnumerable<BotUser> users, 
@@ -133,4 +158,6 @@ public static class BroadcastMessageSender
     
     LogManager.GetCurrentClassLogger().Debug("BROADCAST COMPLETED");
   }
+
+  #endregion
 }
