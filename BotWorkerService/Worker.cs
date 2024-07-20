@@ -4,24 +4,25 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace BotWorkerService;
 
 public class Worker : BackgroundService
 {
   private Process _botProcess;
-  private readonly string runningAssemblyPath;
+  private readonly ILogger<Worker> _logger;
 
-  public Worker(string runningAssemblyPath)
+  public Worker(ILogger<Worker> logger)
   {
-    this.runningAssemblyPath = runningAssemblyPath;
+    _logger = logger;
     PrepareProcess();
   }
 
   private void PrepareProcess()
   {
     _botProcess = new Process();
-    var botAssembly = Assembly.Load(this.runningAssemblyPath);
+    var botAssembly = Assembly.Load(nameof(DirectumCareerNightBot));
     var botExecutableFilepath = Path.ChangeExtension(botAssembly.Location, "exe");
     _botProcess.StartInfo = new ProcessStartInfo
     {

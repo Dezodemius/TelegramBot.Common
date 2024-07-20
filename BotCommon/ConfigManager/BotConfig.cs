@@ -13,4 +13,6 @@ public class BotConfig
   public long[] BotAdminId { get; set; }
 
   public string DbConnectionString { get; set; }
+
+  public string OpenAiApiKey { get; set; }
 }
