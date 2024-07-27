@@ -5,12 +5,21 @@ using Microsoft.EntityFrameworkCore;
 namespace BotCommon.Repository;
 
 /// <summary>
-/// 
+/// DB context for users.
 /// </summary>
 public class UserDbContext 
   : DefaultDbContext<BotUser>
 {
+  #region Fields & props
+
+  /// <summary>
+  /// Bot users.
+  /// </summary>
   public DbSet<BotUser> BotUsers { get; set; }
+
+  #endregion
+
+  #region DefaultDbContext
 
   public override BotUser Get(BotUser user)
   {
@@ -36,18 +45,37 @@ public class UserDbContext
     base.Delete(user);
   }
 
+  #endregion
+
+  #region DbContext
+
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
     optionsBuilder.UseSqlite(this._connectionString);
-  }
+  }  
 
-  public UserDbContext() : this("Filename=app.db")
+  #endregion
+
+  #region Constructors
+
+  /// <summary>
+  /// Constructor.
+  /// </summary>
+  public UserDbContext() 
+    : this("Filename=app.db")
   {
     
   }
   
-  public UserDbContext(string connectionString) : base(connectionString)
+  /// <summary>
+  /// Constructor.
+  /// </summary>
+  /// <param name="connectionString">DB connection string.</param>
+  public UserDbContext(string connectionString) 
+    : base(connectionString)
   {
   }
+
+  #endregion
 }
 

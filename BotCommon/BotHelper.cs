@@ -3,8 +3,16 @@ using Telegram.Bot.Types.Enums;
 
 namespace BotCommon;
 
+/// <summary>
+/// Telegram bot helper.
+/// </summary>
 public static class BotHelper
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="update"></param>
+    /// <returns></returns>
     public static User GetUserInfo(Update update)
     {
         return update.Type switch
@@ -14,7 +22,7 @@ public static class BotHelper
             _ => default
         };
     }
-    
+
     public static string GetUsername(Update update)
     {
         return GetUsername(GetUserInfo(update));
@@ -26,7 +34,7 @@ public static class BotHelper
             ? $"{user.FirstName} {user.LastName}"
             : user.Username;
     }
-    
+
     public static string GetMessage(Update update)
     {
         return update.Type switch

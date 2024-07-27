@@ -12,7 +12,7 @@ namespace BotCommon.Repository;
 public abstract class DefaultDbContext<T> 
   : DbContext
 {
-  #region Fileds & props
+  #region Fields & props
 
   /// <summary>
   /// DB connection string.
@@ -56,7 +56,7 @@ public abstract class DefaultDbContext<T>
 
   #endregion
 
-  #region Base
+  #region DbContext
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
