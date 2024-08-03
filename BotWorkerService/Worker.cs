@@ -8,7 +8,8 @@ using Microsoft.Extensions.Logging;
 
 namespace BotWorkerService;
 
-public class Worker : BackgroundService
+public class Worker 
+  : BackgroundService
 {
   private Process _botProcess;
   private readonly ILogger<Worker> _logger;
