@@ -14,16 +14,17 @@ public class Tests
   {
     const string Config = @"bot_token: 'test1'";
     var config = new DeserializerBuilder()
-        .WithNamingConvention(UnderscoredNamingConvention.Instance)
-        .WithDuplicateKeyChecking()
-        .Build()
-        .Deserialize<BotConfig>(Config);
+      .WithNamingConvention(UnderscoredNamingConvention.Instance)
+      .WithDuplicateKeyChecking()
+      .Build()
+      .Deserialize<BotConfig>(Config);
 
     BotConfigManager configManager;
     using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(Config)))
     {
       configManager = new BotConfigManager(memoryStream);
     }
+
     var config2 = configManager.Config;
 
     Assert.Multiple(() =>

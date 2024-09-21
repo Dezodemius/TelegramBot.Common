@@ -5,19 +5,19 @@ using Telegram.Bot.Types;
 namespace BotCommon.Scenarios;
 
 /// <summary>
-/// Long command step.
+///   Long command step.
 /// </summary>
 public class BotLongCommandStep
 {
   #region Fields & props
 
   /// <summary>
-  /// Step action delegate.
+  ///   Step action delegate.
   /// </summary>
   public delegate Task StepActionType(ITelegramBotClient bot, Update update, long chatId);
 
   /// <summary>
-  /// Step action.
+  ///   Step action.
   /// </summary>
   public StepActionType StepAction { get; }
 
@@ -26,17 +26,19 @@ public class BotLongCommandStep
   #region Constructors
 
   /// <summary>
-  /// Constructor.
+  ///   Constructor.
   /// </summary>
-  public BotLongCommandStep() { }
+  public BotLongCommandStep()
+  {
+  }
 
   /// <summary>
-  /// Constructor.
+  ///   Constructor.
   /// </summary>
   /// <param name="stepAction">Step action.</param>
   public BotLongCommandStep(StepActionType stepAction)
   {
-    this.StepAction = stepAction;
+    StepAction = stepAction;
   }
 
   #endregion

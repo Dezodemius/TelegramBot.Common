@@ -6,52 +6,35 @@ using Microsoft.EntityFrameworkCore.Storage;
 namespace BotCommon.Repository;
 
 /// <summary>
-/// Default DB context.
+///   Default DB context.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class DefaultDbContext<T> 
+public abstract class DefaultDbContext<T>
   : DbContext
 {
   #region Fields & props
 
   /// <summary>
-  /// DB connection string.
+  ///   DB connection string.
   /// </summary>
   protected readonly string _connectionString;
 
   #endregion
 
-  #region Methods
+  #region Constructors
 
   /// <summary>
-  /// Get entity.
+  ///   Constructor.
   /// </summary>
-  /// <param name="entity">Entity to get.</param>
-  /// <returns>Found entity.</returns>
-  public abstract T Get(T entity);
-  
-  /// <summary>
-  /// Get all entities.
-  /// </summary>
-  /// <returns>List of all entities.</returns>
-  public abstract IEnumerable<T> GetAll();
-
-  /// <summary>
-  /// Add entity.
-  /// </summary>
-  /// <param name="entity">Entity to add.</param>
-  public virtual void Add(T entity)
+  /// <param name="connectionString">DB connection string.</param>
+  public DefaultDbContext(string connectionString)
   {
-    this.SaveChangesAsync();
-  }
+    _connectionString = connectionString;
+    Database.EnsureCreated();
 
-  /// <summary>
-  /// Delete entity.
-  /// </summary>
-  /// <param name="entity">Entity to delete.</param>
-  public virtual void Delete(T entity)
-  {
-    this.SaveChangesAsync();
+    var creator = this.GetService<IRelationalDatabaseCreator>();
+    if (!creator.Exists())
+      creator.CreateTables();
   }
 
   #endregion
@@ -60,25 +43,42 @@ public abstract class DefaultDbContext<T>
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
-    optionsBuilder.UseSqlite(this._connectionString);
+    optionsBuilder.UseSqlite(_connectionString);
   }
 
   #endregion
 
-  #region Constructors
+  #region Methods
 
   /// <summary>
-  /// Constructor.
+  ///   Get entity.
   /// </summary>
-  /// <param name="connectionString">DB connection string.</param>
-  public DefaultDbContext(string connectionString)
-  {
-    this._connectionString = connectionString;
-    Database.EnsureCreated();
+  /// <param name="entity">Entity to get.</param>
+  /// <returns>Found entity.</returns>
+  public abstract T Get(T entity);
 
-    var creator = this.GetService<IRelationalDatabaseCreator>();
-    if (!creator.Exists())
-      creator.CreateTables();
+  /// <summary>
+  ///   Get all entities.
+  /// </summary>
+  /// <returns>List of all entities.</returns>
+  public abstract IEnumerable<T> GetAll();
+
+  /// <summary>
+  ///   Add entity.
+  /// </summary>
+  /// <param name="entity">Entity to add.</param>
+  public virtual void Add(T entity)
+  {
+    SaveChangesAsync();
+  }
+
+  /// <summary>
+  ///   Delete entity.
+  /// </summary>
+  /// <param name="entity">Entity to delete.</param>
+  public virtual void Delete(T entity)
+  {
+    SaveChangesAsync();
   }
 
   #endregion

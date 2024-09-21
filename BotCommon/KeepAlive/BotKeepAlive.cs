@@ -7,24 +7,24 @@ using Telegram.Bot;
 namespace BotCommon.KeepAlive;
 
 /// <summary>
-/// Bot keep alive operation.
+///   Bot keep alive operation.
 /// </summary>
 public class BotKeepAlive
 {
   #region Fields & props
 
   /// <summary>
-  /// Logger.
+  ///   Logger.
   /// </summary>
   private static readonly ILogger _log = LogManager.GetCurrentClassLogger();
 
   /// <summary>
-  /// Default operation timer.
+  ///   Default operation timer.
   /// </summary>
   private static readonly TimeSpan _defaultTimeout = TimeSpan.FromMinutes(30);
 
   /// <summary>
-  /// Timer.
+  ///   Timer.
   /// </summary>
   private readonly Timer _timer;
 
@@ -33,7 +33,7 @@ public class BotKeepAlive
   #region Methods
 
   /// <summary>
-  /// Start keep alive operation.
+  ///   Start keep alive operation.
   /// </summary>
   public void StopKeepAlive()
   {
@@ -43,7 +43,7 @@ public class BotKeepAlive
   }
 
   /// <summary>
-  /// Stop keep alive operation.
+  ///   Stop keep alive operation.
   /// </summary>
   public void StartKeepAlive()
   {
@@ -56,7 +56,7 @@ public class BotKeepAlive
   #region Constructors
 
   /// <summary>
-  /// Constructor.
+  ///   Constructor.
   /// </summary>
   /// <param name="bot">Telegram bot client.</param>
   public BotKeepAlive(ITelegramBotClient bot)
@@ -65,7 +65,7 @@ public class BotKeepAlive
   }
 
   /// <summary>
-  /// Constructor.
+  ///   Constructor.
   /// </summary>
   /// <param name="bot">Telegram bot client.</param>
   /// <param name="timeout">Operation timeout.</param>
@@ -81,6 +81,4 @@ public class BotKeepAlive
   }
 
   #endregion
-
-
 }

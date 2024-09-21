@@ -4,16 +4,16 @@ using Telegram.Bot.Types.Enums;
 namespace BotCommon;
 
 /// <summary>
-/// Telegram bot helper.
+///   Telegram bot helper.
 /// </summary>
 public static class BotHelper
 {
   /// <summary>
-  /// Get info about telegram user.
+  ///   Get info about telegram user.
   /// </summary>
   /// <remarks>
-  /// User info extracts from update of type <see cref="UpdateType.Message"/> or <see cref="UpdateType.CallbackQuery"/>.
-  /// If the type does not match, the <c>default</c> value is returned.
+  ///   User info extracts from update of type <see cref="UpdateType.Message" /> or <see cref="UpdateType.CallbackQuery" />.
+  ///   If the type does not match, the <c>default</c> value is returned.
   /// </remarks>
   /// <param name="update">Update containing info about user.</param>
   /// <returns>Telegram user.</returns>
@@ -28,7 +28,7 @@ public static class BotHelper
   }
 
   /// <summary>
-  /// Get username.
+  ///   Get username.
   /// </summary>
   /// <param name="update">Update containing info about user.</param>
   /// <returns>Username.</returns>
@@ -38,7 +38,7 @@ public static class BotHelper
   }
 
   /// <summary>
-  /// Get username.
+  ///   Get username.
   /// </summary>
   /// <param name="user">Telegram user.</param>
   /// <returns>Username.</returns>
@@ -50,11 +50,12 @@ public static class BotHelper
   }
 
   /// <summary>
-  /// Get message.
+  ///   Get message.
   /// </summary>
-  /// /// <remarks>
-  /// Message extracts from update of type <see cref="UpdateType.Message"/> or <see cref="UpdateType.CallbackQuery"/>.
-  /// If the type does not match, the <c>default</c> value is returned.
+  /// ///
+  /// <remarks>
+  ///   Message extracts from update of type <see cref="UpdateType.Message" /> or <see cref="UpdateType.CallbackQuery" />.
+  ///   If the type does not match, the <c>default</c> value is returned.
   /// </remarks>
   /// <param name="update">Update containing message.</param>
   /// <returns>Message.</returns>

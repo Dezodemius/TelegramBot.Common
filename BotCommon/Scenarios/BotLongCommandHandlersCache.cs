@@ -6,7 +6,7 @@ using System.Linq;
 namespace BotCommon.Scenarios;
 
 /// <summary>
-/// Bot long command cache. 
+///   Bot long command cache.
 /// </summary>
 public static class BotLongCommandHandlersCache
 {
@@ -16,7 +16,7 @@ public static class BotLongCommandHandlersCache
     = new Dictionary<long, BotLongCommandHandler>();
 
   /// <summary>
-  /// Long command handlers cache.
+  ///   Long command handlers cache.
   /// </summary>
   public static ReadOnlyDictionary<long, BotLongCommandHandler> LongCommandHandlers
     => _longCommandHandlers.AsReadOnly();
@@ -26,7 +26,7 @@ public static class BotLongCommandHandlersCache
   #region Methods
 
   /// <summary>
-  /// Find command by name and user ID.
+  ///   Find command by name and user ID.
   /// </summary>
   /// <param name="userId">Telegram bot user ID.</param>
   /// <param name="commandName">Command name to find.</param>
@@ -38,20 +38,18 @@ public static class BotLongCommandHandlersCache
   }
 
   /// <summary>
-  /// Add command to cache.
+  ///   Add command to cache.
   /// </summary>
   /// <param name="userId">Telegram bot user ID.</param>
   /// <param name="commandHandler">Long command handler.</param>
   public static void Add(long userId, BotLongCommandHandler commandHandler)
   {
     if (_longCommandHandlers.All(s => s.Key == userId && s.Value.Id != commandHandler.Id))
-    {
       _longCommandHandlers.Add(new KeyValuePair<long, BotLongCommandHandler>(userId, commandHandler));
-    }
   }
 
   /// <summary>
-  /// Remove command from cache by command ID.
+  ///   Remove command from cache by command ID.
   /// </summary>
   /// <param name="userId">Telegram bot user ID.</param>
   /// <param name="commandId">Long command handler ID.</param>
@@ -62,7 +60,7 @@ public static class BotLongCommandHandlersCache
   }
 
   /// <summary>
-  /// Remove command from cache.
+  ///   Remove command from cache.
   /// </summary>
   /// <param name="userId">Telegram bot user ID.</param>
   /// <param name="longCommandHandler">Long command handler.</param>
@@ -73,7 +71,7 @@ public static class BotLongCommandHandlersCache
   }
 
   /// <summary>
-  /// Get long command handler from cache.
+  ///   Get long command handler from cache.
   /// </summary>
   /// <param name="userId">Telegram bot user ID.</param>
   /// <param name="longCommandHandlerId">Long command handler ID.</param>

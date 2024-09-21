@@ -4,83 +4,83 @@ using System.Linq;
 namespace BotCommon.Scenarios;
 
 /// <summary>
-/// Long chat command repository.
+///   Long chat command repository.
 /// </summary>
 public sealed class LongCommandRepository
 {
   #region Fields & props
 
   /// <summary>
-  /// Long commands.
+  ///   Long commands.
   /// </summary>
-  private readonly List<LongCommand> _longCommands = new List<LongCommand>();
+  private readonly List<LongCommand> _longCommands = new();
 
   #endregion
 
   #region Methods
 
   /// <summary>
-  /// Try get long command for user.
+  ///   Try get long command for user.
   /// </summary>
   /// <param name="userId">Telegram user ID.</param>
   /// <param name="longCommand">Founded long command.</param>
   /// <returns><c>true</c> if command exists.</returns>
   public bool TryGet(long userId, out LongCommand longCommand)
   {
-    longCommand = this.Get(userId);
+    longCommand = Get(userId);
     return longCommand != null;
   }
 
   /// <summary>
-  /// Get long command for user.
+  ///   Get long command for user.
   /// </summary>
   /// <param name="userId">Telegram user ID.</param>
   /// <returns>Found long command.</returns>
   public LongCommand Get(long userId)
   {
-    var foundedScenario = this._longCommands.SingleOrDefault(s => s.UserId == userId);
+    var foundedScenario = _longCommands.SingleOrDefault(s => s.UserId == userId);
     return foundedScenario;
   }
 
   /// <summary>
-  /// Remove command for user.
+  ///   Remove command for user.
   /// </summary>
   /// <param name="userId">Telegram user ID.</param>
   public void Remove(long userId)
   {
-    var foundedScenario = this.Get(userId);
+    var foundedScenario = Get(userId);
     if (foundedScenario == null)
       return;
 
     foundedScenario.LongCommandHandler.Reset();
 
-    this._longCommands.Remove(foundedScenario);
+    _longCommands.Remove(foundedScenario);
   }
 
   /// <summary>
-  /// Remove command for user.
+  ///   Remove command for user.
   /// </summary>
   /// <param name="command">Command for remove.</param>
   public void Remove(LongCommand command)
   {
     if (command == null)
       return;
-    this.Remove(command.UserId);
+    Remove(command.UserId);
   }
 
   /// <summary>
-  /// Add or replace long command.
+  ///   Add or replace long command.
   /// </summary>
   /// <param name="longCommand">Command to add or replace.</param>
   public void AddOrReplace(LongCommand longCommand)
   {
     if (longCommand == null)
       return;
-  
-    if (this.TryGet(longCommand.UserId, out var _userCommandScenario))
-      this.Remove(_userCommandScenario);
 
-    this._longCommands.Add(longCommand);
+    if (TryGet(longCommand.UserId, out var _userCommandScenario))
+      Remove(_userCommandScenario);
+
+    _longCommands.Add(longCommand);
   }
 
   #endregion

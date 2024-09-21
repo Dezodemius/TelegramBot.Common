@@ -1,8 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
@@ -10,29 +7,10 @@ namespace BotCommon.Scenarios;
 
 public class LongCommand
 {
-  #region Fields & props
-
-  /// <summary>
-  /// Telegram user ID.
-  /// </summary>
-  public long UserId { get; set; }
-
-  /// <summary>
-  /// Command ID.
-  /// </summary>
-  public Guid CommandId { get; set; }
-
-  /// <summary>
-  /// Long command handler.
-  /// </summary>
-  public BotLongCommandHandler LongCommandHandler { get; set; }
-
-  #endregion
-
   #region Methods
 
   /// <summary>
-  /// Run command.
+  ///   Run command.
   /// </summary>
   /// <param name="botClient">Telegram bot client.</param>
   /// <param name="update">Telegram chat update.</param>
@@ -45,23 +23,44 @@ public class LongCommand
 
   #endregion
 
+  #region Fields & props
+
+  /// <summary>
+  ///   Telegram user ID.
+  /// </summary>
+  public long UserId { get; set; }
+
+  /// <summary>
+  ///   Command ID.
+  /// </summary>
+  public Guid CommandId { get; set; }
+
+  /// <summary>
+  ///   Long command handler.
+  /// </summary>
+  public BotLongCommandHandler LongCommandHandler { get; set; }
+
+  #endregion
+
   #region Constructors
 
   /// <summary>
-  /// Constructor.
+  ///   Constructor.
   /// </summary>
-  public LongCommand() { }
+  public LongCommand()
+  {
+  }
 
   /// <summary>
-  /// Constructor.
+  ///   Constructor.
   /// </summary>
   /// <param name="userId">Telegram user ID.</param>
   /// <param name="longCommandHandler">Long command handler.</param>
   public LongCommand(long userId, BotLongCommandHandler longCommandHandler)
   {
-    this.UserId = userId;
-    this.LongCommandHandler = longCommandHandler;
-    this.CommandId = longCommandHandler.Id;
+    UserId = userId;
+    LongCommandHandler = longCommandHandler;
+    CommandId = longCommandHandler.Id;
   }
 
   #endregion

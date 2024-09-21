@@ -5,20 +5,21 @@ using Telegram.Bot.Types;
 namespace BotCommon.Scenarios;
 
 /// <summary>
-/// Auto step command command handler.
+///   Auto step command command handler.
 /// </summary>
 /// <remarks></remarks>
-public abstract class AutoStepBotLongCommandHandler 
+public abstract class AutoStepBotLongCommandHandler
   : BotLongCommandHandler
 {
   #region Base
 
-  public override async Task<bool> ExecuteLongCommandStep(ITelegramBotClient telegramBotClient, Update update, long chatId)
+  public override async Task<bool> ExecuteLongCommandStep(ITelegramBotClient telegramBotClient, Update update,
+    long chatId)
   {
-    if (!this._steps.MoveNext())
+    if (!_steps.MoveNext())
       return false;
 
-    this._currentStep = this._steps.Current;
+    _currentStep = _steps.Current;
     return await base.ExecuteLongCommandStep(telegramBotClient, update, chatId);
   }
 

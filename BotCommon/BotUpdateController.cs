@@ -40,7 +40,8 @@ public class BotUpdateController : ControllerBase
     }
     else if (text.StartsWith("/help"))
     {
-      await _botClient.SendTextMessageAsync(chatId, "Available commands:\n/start - Start the bot\n/help - Show this help message");
+      await _botClient.SendTextMessageAsync(chatId,
+        "Available commands:\n/start - Start the bot\n/help - Show this help message");
     }
     else if (text.StartsWith("/echo"))
     {

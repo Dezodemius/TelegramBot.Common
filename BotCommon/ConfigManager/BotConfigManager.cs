@@ -6,37 +6,23 @@ using YamlDotNet.Serialization.NamingConventions;
 namespace BotCommon.ConfigManager;
 
 /// <summary>
-/// Bot configuration manager.
+///   Bot configuration manager.
 /// </summary>
 public class BotConfigManager
 {
   #region Constants
 
   /// <summary>
-  /// Bot configuration filename.
+  ///   Bot configuration filename.
   /// </summary>
   private const string BotConfigFileName = "_config.yaml";
-
-  #endregion
-
-  #region Fields & Props
-
-  /// <summary>
-  /// YAML deserializer.
-  /// </summary>
-  private readonly IDeserializer _configDeserializer = BuildDeserializer();
-
-  /// <summary>
-  /// Bot configuration.
-  /// </summary>
-  public readonly BotConfig Config;
 
   #endregion
 
   #region Methods
 
   /// <summary>
-  /// Builds YAML deserializer.
+  ///   Builds YAML deserializer.
   /// </summary>
   /// <returns>YAML deserializer</returns>
   private static IDeserializer BuildDeserializer()
@@ -49,10 +35,24 @@ public class BotConfigManager
 
   #endregion
 
+  #region Fields & Props
+
+  /// <summary>
+  ///   YAML deserializer.
+  /// </summary>
+  private readonly IDeserializer _configDeserializer = BuildDeserializer();
+
+  /// <summary>
+  ///   Bot configuration.
+  /// </summary>
+  public readonly BotConfig Config;
+
+  #endregion
+
   #region Constructors
 
   /// <summary>
-  /// Constructor.
+  ///   Constructor.
   /// </summary>
   /// <param name="stream">Configuration source stream.</param>
   public BotConfigManager(Stream stream)
@@ -61,13 +61,13 @@ public class BotConfigManager
     {
       using (var reader = new StreamReader(stream))
       {
-        this.Config = _configDeserializer.Deserialize<BotConfig>(reader);
+        Config = _configDeserializer.Deserialize<BotConfig>(reader);
       }
     }
   }
 
   /// <summary>
-  /// Constructor.
+  ///   Constructor.
   /// </summary>
   public BotConfigManager()
     : this(File.OpenRead(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, BotConfigFileName)))
