@@ -10,12 +10,12 @@ namespace BotCommon;
 public static class StickersManager
 {
   /// <summary>
-  ///   Sticker from pack.
+  /// Sticker from pack.
   /// </summary>
   private static Sticker[] _stickers;
 
   /// <summary>
-  ///   Initialize manager by sticker pack.
+  /// Initialize manager by sticker pack.
   /// </summary>
   /// <param name="botClient">Telegram bot client.</param>
   /// <param name="stickerPackName">Sticker pack name.</param>
@@ -25,7 +25,7 @@ public static class StickersManager
   }
 
   /// <summary>
-  ///   Send sticker from sticker pack.
+  /// Send sticker from sticker pack.
   /// </summary>
   /// <param name="botClient">Telegram bot client.</param>
   /// <param name="chatId">Telegram user chat ID.</param>
