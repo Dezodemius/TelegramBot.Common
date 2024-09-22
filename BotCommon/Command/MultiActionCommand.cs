@@ -45,7 +45,7 @@ public class MultiActionCommand : BaseCommand
   /// <param name="stepAction">Adding action.</param>
   /// <param name="condition">Condition of action</param>
   /// <returns>Current command.</returns>
-  public MultiActionCommand ThenOnCondition(StepAction stepAction, Predicate<UserContext> condition)
+  public MultiActionCommand ThenOnCondition(StepAction stepAction, Predicate<UserContext.UserContext> condition)
   {
     this.ThrowOnCommandNotStarted();
     this.ThrowOnCommandIsCompleted();

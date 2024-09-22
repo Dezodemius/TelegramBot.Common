@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using BotCommon.Command;
 
-namespace BotCommon.Command;
+namespace BotCommon.UserContext;
 
 /// <summary>
 /// User context.

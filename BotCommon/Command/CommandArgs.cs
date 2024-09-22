@@ -22,7 +22,7 @@ public class CommandArgs
   /// <summary>
   /// User context.
   /// </summary>
-  public UserContext UserContext { get; }
+  public UserContext.UserContext UserContext { get; }
 
   #endregion
 
@@ -34,7 +34,7 @@ public class CommandArgs
   /// <param name="chatId">Bot user ID.</param>
   /// <param name="botClient">Telegram bot client.</param>
   /// <param name="userContext">Bot user context.</param>
-  public CommandArgs(long chatId, ITelegramBotClient botClient, UserContext userContext)
+  public CommandArgs(long chatId, ITelegramBotClient botClient, UserContext.UserContext userContext)
   {
     this.ChatId = chatId;
     this.BotClient = botClient;
