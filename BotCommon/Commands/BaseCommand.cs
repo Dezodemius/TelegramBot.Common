@@ -24,7 +24,7 @@ public abstract class BaseCommand
   /// <summary>
   /// Command step action type.
   /// </summary>
-  public delegate void StepAction(CommandArgs args);
+  public delegate void StepAction(UserContext context, CommandArgs args);
   
   /// <summary>
   /// Steps of the command.
@@ -38,7 +38,8 @@ public abstract class BaseCommand
   public void ExecuteCommand(UserContext context, CommandArgs args)
   {
     var currentStepIndex = context.CurrentCommandIndex;
-    this._stepActions.ElementAt(currentStepIndex)(args);
+    this._stepActions.ElementAt(currentStepIndex)(context, args);
+    context.CurrentCommandIndex++;
   }
 
   #endregion

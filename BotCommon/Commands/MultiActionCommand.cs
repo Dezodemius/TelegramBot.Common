@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BotCommon.UserContexts;
 
 namespace BotCommon.Commands;
 
@@ -45,15 +46,15 @@ public class MultiActionCommand : BaseCommand
   /// <param name="stepAction">Adding action.</param>
   /// <param name="condition">Condition of action</param>
   /// <returns>Current command.</returns>
-  public MultiActionCommand ThenOnCondition(StepAction stepAction, Predicate<CommandArgs> condition)
+  public MultiActionCommand ThenOnCondition(StepAction stepAction, Func<UserContext, CommandArgs, bool> condition)
   {
     this.ThrowOnCommandNotStarted();
     this.ThrowOnCommandIsCompleted();
     
-    this._stepActions.Add((args) =>
+    this._stepActions.Add((context, args) =>
     {
-      if (condition(args))
-        stepAction(args);
+      if (condition(context, args))
+        stepAction(context, args);
     });
 
     return this;
@@ -69,9 +70,9 @@ public class MultiActionCommand : BaseCommand
     this.ThrowOnCommandNotStarted();
     this.ThrowOnCommandIsCompleted();
 
-    this._stepActions.Add((args) =>
+    this._stepActions.Add((context, args) =>
     {
-      stepAction(args);
+      stepAction(context, args);
       this.IsCompleted = true;
     });
 
@@ -87,7 +88,7 @@ public class MultiActionCommand : BaseCommand
     this.ThrowOnCommandNotStarted();
     this.ThrowOnCommandIsCompleted();
 
-    this._stepActions.Add((_) =>
+    this._stepActions.Add((_, _) =>
     {
       this.IsCompleted = true;
     });
@@ -133,10 +134,7 @@ public class MultiActionCommand : BaseCommand
   /// Constructor.
   /// </summary>
   /// <param name="commandName">Name of command.</param>
-  public MultiActionCommand(string commandName) : base(commandName)
-  {
-    this._stepActions = new List<StepAction>();
-  }
+  public MultiActionCommand(string commandName) : base(commandName) { }
 
   #endregion
 }
