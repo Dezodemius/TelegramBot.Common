@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using BotCommon.Command;
+using BotCommon.Commands;
 
-namespace BotCommon.UserContext;
+namespace BotCommon.UserContexts;
 
 /// <summary>
 /// User context.
@@ -18,17 +18,22 @@ public class UserContext
   /// <summary>
   /// Bot command context.
   /// </summary>
-  public MultiActionCommand MultiActionCommandContext { get; set; }
+  public BaseCommand Command { get; set; }
+  
+  /// <summary>
+  /// Current index of command action.
+  /// </summary>
+  public int CurrentCommandIndex { get; private set; }
 
   /// <summary>
-  /// User context paramenters.
+  /// User context parameters.
   /// </summary>
   public Dictionary<string, object> Parameters { get; } = new();
 
   /// <summary>
   /// Is user has active command.
   /// </summary>
-  public bool HasActiveCommand => MultiActionCommandContext is { IsCompleted: false };
+  public bool HasActiveCommand => Command is { IsCompleted: false };
 
   #endregion
 

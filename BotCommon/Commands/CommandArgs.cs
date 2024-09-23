@@ -1,6 +1,6 @@
 ﻿using Telegram.Bot;
 
-namespace BotCommon.Command;
+namespace BotCommon.Commands;
 
 /// <summary>
 /// Command arguments.
@@ -19,11 +19,6 @@ public class CommandArgs
   /// </summary>
   public ITelegramBotClient BotClient { get; }
 
-  /// <summary>
-  /// User context.
-  /// </summary>
-  public UserContext.UserContext UserContext { get; }
-
   #endregion
 
   #region Constructors
@@ -33,12 +28,10 @@ public class CommandArgs
   /// </summary>
   /// <param name="chatId">Bot user ID.</param>
   /// <param name="botClient">Telegram bot client.</param>
-  /// <param name="userContext">Bot user context.</param>
-  public CommandArgs(long chatId, ITelegramBotClient botClient, UserContext.UserContext userContext)
+  public CommandArgs(long chatId, ITelegramBotClient botClient)
   {
     this.ChatId = chatId;
     this.BotClient = botClient;
-    this.UserContext = userContext;
   }
 
   #endregion

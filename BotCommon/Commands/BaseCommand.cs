@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using BotCommon.UserContexts;
 
-namespace BotCommon.Command;
+namespace BotCommon.Commands;
 
 /// <summary>
 /// Base bot command.
@@ -28,6 +30,16 @@ public abstract class BaseCommand
   /// Steps of the command.
   /// </summary>
   protected ICollection<StepAction> _stepActions;
+
+  #endregion
+
+  #region Methods
+
+  public void ExecuteCommand(UserContext context, CommandArgs args)
+  {
+    var currentStepIndex = context.CurrentCommandIndex;
+    this._stepActions.ElementAt(currentStepIndex)(args);
+  }
 
   #endregion
 

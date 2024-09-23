@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BotCommon.UserContext;
+namespace BotCommon.UserContexts;
 
 /// <summary>
 /// User context manager.
@@ -12,7 +12,7 @@ public class UserContextManager
   /// <summary>
   /// User contexts.
   /// </summary>
-  private readonly Dictionary<long, UserContext> _userContexts = new();
+  private readonly Dictionary<long, UserContexts.UserContext> _userContexts = new();
 
   #endregion
 
@@ -23,9 +23,9 @@ public class UserContextManager
   /// </summary>
   /// <param name="userId">Bot user ID.</param>
   /// <returns>Created or found user context.</returns>
-  public UserContext GetOrCreateUserContext(long userId)
+  public UserContexts.UserContext GetOrCreateUserContext(long userId)
   {
-    if (!_userContexts.ContainsKey(userId)) _userContexts[userId] = new UserContext(userId);
+    if (!_userContexts.ContainsKey(userId)) _userContexts[userId] = new UserContexts.UserContext(userId);
     return _userContexts[userId];
   }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace BotCommon.Command;
+namespace BotCommon.Commands;
 
 /// <summary>
 /// Single bot command.

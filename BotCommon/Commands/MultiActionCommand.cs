@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BotCommon.Command;
+namespace BotCommon.Commands;
 
 /// <summary>
 /// Bot multi-action command.
@@ -45,14 +45,14 @@ public class MultiActionCommand : BaseCommand
   /// <param name="stepAction">Adding action.</param>
   /// <param name="condition">Condition of action</param>
   /// <returns>Current command.</returns>
-  public MultiActionCommand ThenOnCondition(StepAction stepAction, Predicate<UserContext.UserContext> condition)
+  public MultiActionCommand ThenOnCondition(StepAction stepAction, Predicate<CommandArgs> condition)
   {
     this.ThrowOnCommandNotStarted();
     this.ThrowOnCommandIsCompleted();
     
     this._stepActions.Add((args) =>
     {
-      if (condition(args.UserContext))
+      if (condition(args))
         stepAction(args);
     });
 
