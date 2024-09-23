@@ -6,43 +6,21 @@ using Microsoft.EntityFrameworkCore.Storage;
 namespace BotCommon.Broadcast;
 
 /// <summary>
-/// Broadcasting message DB context.
+///   Broadcasting message DB context.
 /// </summary>
-public class BroadcastMessageDbContext 
+public class BroadcastMessageDbContext
   : DbContext
 {
-  #region Fields & props
+  #region Constructors
 
-  /// <summary>
-  /// Lock object.
-  /// </summary>
-  private static readonly object _padlock = new object();
-  
-  /// <summary>
-  /// Lazy object.
-  /// </summary>
-  private static readonly Lazy<BroadcastMessageDbContext> _lazy = new(() => new BroadcastMessageDbContext());
-
-  private static volatile BroadcastMessageDbContext _instance;
-
-  /// <summary>
-  /// Singleton instance.
-  /// </summary>
-  public static BroadcastMessageDbContext Instance
+  public BroadcastMessageDbContext()
   {
-    get
-    {
-      if (_instance != null) 
-        return _instance;
-      lock (_padlock)
-      {
-        _instance = _instance ?? _lazy.Value;
-      }
-      return _instance;
-    }
-  } 
+    Database.EnsureCreated();
 
-  public DbSet<BroadcastMessageUser> BroadcastMessageUsers { get; set; }
+    var creator = this.GetService<IRelationalDatabaseCreator>();
+    if (!creator.Exists())
+      creator.CreateTables();
+  }
 
   #endregion
 
@@ -55,16 +33,39 @@ public class BroadcastMessageDbContext
 
   #endregion
 
-  #region Constructors
-  
-  public BroadcastMessageDbContext()
-  {
-    Database.EnsureCreated();
+  #region Fields & props
 
-    var creator = this.GetService<IRelationalDatabaseCreator>();
-    if (!creator.Exists())
-      creator.CreateTables();
+  /// <summary>
+  ///   Lock object.
+  /// </summary>
+  private static readonly object _padlock = new();
+
+  /// <summary>
+  ///   Lazy object.
+  /// </summary>
+  private static readonly Lazy<BroadcastMessageDbContext> _lazy = new(() => new BroadcastMessageDbContext());
+
+  private static volatile BroadcastMessageDbContext _instance;
+
+  /// <summary>
+  ///   Singleton instance.
+  /// </summary>
+  public static BroadcastMessageDbContext Instance
+  {
+    get
+    {
+      if (_instance != null)
+        return _instance;
+      lock (_padlock)
+      {
+        _instance = _instance ?? _lazy.Value;
+      }
+
+      return _instance;
+    }
   }
+
+  public DbSet<BroadcastMessageUser> BroadcastMessageUsers { get; set; }
 
   #endregion
 }

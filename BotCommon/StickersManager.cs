@@ -5,7 +5,7 @@ using Telegram.Bot.Types;
 namespace BotCommon;
 
 /// <summary>
-/// Telegram chat sticker manager.
+///   Telegram chat sticker manager.
 /// </summary>
 public static class StickersManager
 {
