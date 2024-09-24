@@ -32,7 +32,7 @@ public class MultiActionCommandValidatorTests
       .Then(null)
       .End();
 
-    Assert.Throws<CommandNotStartedException>(() =>
+    Assert.Throws<MultiActionCommandNotStartedException>(() =>
     {
       MultiActionCommandValidator.Validate(command);
     });

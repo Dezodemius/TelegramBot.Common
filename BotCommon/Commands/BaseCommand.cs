@@ -30,7 +30,7 @@ public abstract class BaseCommand
   /// <summary>
   /// Steps of the command.
   /// </summary>
-  protected ICollection<StepAction> _stepActions;
+  protected IList<StepAction> _stepActions;
 
   #endregion
 

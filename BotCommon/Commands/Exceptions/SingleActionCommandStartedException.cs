@@ -3,13 +3,13 @@
 namespace BotCommon.Commands.Exceptions;
 
 /// <summary>
-/// Command ended exception.
+/// Single command already started exception.
 /// </summary>
-public class CommandEndedException : Exception
+public class SingleActionCommandStartedException : Exception
 {
   /// <summary>
   /// Constructor.
   /// </summary>
   /// <param name="message">Exception message.</param>
-  public CommandEndedException(string message) : base(message){ }
+  public SingleActionCommandStartedException(string message) : base(message){ }
 }

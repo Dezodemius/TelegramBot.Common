@@ -89,7 +89,7 @@ public class MultiActionCommandTests
   [Test]
   public void MultiActionCommand_BuildCommand_TwiceStarted_ThrowsException()
   {
-    Assert.Throws<CommandStartedException>(() =>
+    Assert.Throws<MultiActionCommandStartedException>(() =>
     {
       _ = new MultiActionCommand(TestCommandName)
         .StartWith(null)
@@ -100,7 +100,7 @@ public class MultiActionCommandTests
   [Test]
   public void MultiActionCommand_BuildCommand_TwiceCompleted_ThrowsException()
   {
-    Assert.Throws<CommandEndedException>(() =>
+    Assert.Throws<MultiActionCommandEndedException>(() =>
     {
       _ = new MultiActionCommand(TestCommandName)
         .StartWith(null)
@@ -114,7 +114,7 @@ public class MultiActionCommandTests
   [Test]
   public void MultiActionCommand_BuildCommand_CompletedWithAction_ThrowsException()
   {
-    Assert.Throws<CommandEndedException>(() =>
+    Assert.Throws<MultiActionCommandEndedException>(() =>
     {
       _ = new MultiActionCommand(TestCommandName)
         .StartWith(null)

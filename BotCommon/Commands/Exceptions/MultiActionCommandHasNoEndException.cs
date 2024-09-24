@@ -3,13 +3,13 @@
 namespace BotCommon.Commands.Exceptions;
 
 /// <summary>
-/// Command is null exception.
+/// Multi-action command has no end exception.
 /// </summary>
-public class CommandNullException : Exception
+public class MultiActionCommandHasNoEndException : Exception
 {
   /// <summary>
   /// Constructor.
   /// </summary>
   /// <param name="message">Exception message.</param>
-  public CommandNullException(string message) : base(message){ }
+  public MultiActionCommandHasNoEndException(string message) : base(message){ }  
 }

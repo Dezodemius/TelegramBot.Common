@@ -3,13 +3,13 @@
 namespace BotCommon.Commands.Exceptions;
 
 /// <summary>
-/// Command started exception.
+/// Multi-action command started exception.
 /// </summary>
-public class CommandStartedException : Exception
+public class MultiActionCommandNotStartedException : Exception
 {
   /// <summary>
   /// Constructor.
   /// </summary>
   /// <param name="message">Exception message.</param>
-  public CommandStartedException(string message) : base(message){ }
+  public MultiActionCommandNotStartedException(string message) : base(message){ }
 }

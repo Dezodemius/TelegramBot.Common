@@ -34,7 +34,7 @@ public class MultiActionCommand : BaseCommand
   public MultiActionCommand StartWith(StepAction action)
   {
     if (this.HasStart)
-      throw new CommandStartedException("Command already started");
+      throw new MultiActionCommandStartedException("Command already started");
 
     this.HasStart = true;
 
@@ -80,7 +80,7 @@ public class MultiActionCommand : BaseCommand
   public MultiActionCommand EndAfter(StepAction stepAction)
   {
     if (this.HasEnd)
-      throw new CommandEndedException("Command already ended");
+      throw new MultiActionCommandEndedException("Command already ended");
 
     this._stepActions.Add((context, args) =>
     {
@@ -100,7 +100,7 @@ public class MultiActionCommand : BaseCommand
   public MultiActionCommand End()
   {
     if (this.HasEnd)
-      throw new CommandEndedException("Command already ended");
+      throw new MultiActionCommandEndedException("Command already ended");
 
     this._stepActions.Add((_, _) =>
     {
