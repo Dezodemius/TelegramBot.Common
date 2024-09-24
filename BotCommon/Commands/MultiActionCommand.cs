@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BotCommon.Commands.Exceptions;
 using BotCommon.UserContexts;
 
 namespace BotCommon.Commands;
@@ -9,6 +10,20 @@ namespace BotCommon.Commands;
 /// </summary>
 public class MultiActionCommand : BaseCommand
 {
+  #region Fields and props
+
+  /// <summary>
+  /// A sign that a command has start.
+  /// </summary>
+  internal bool HasStart { get; private set; }
+  
+  /// <summary>
+  /// A sign that a command has an end.
+  /// </summary>
+  internal bool HasEnd { get; private set; }
+
+  #endregion
+  
   #region Methods
 
   /// <summary>
@@ -18,9 +33,12 @@ public class MultiActionCommand : BaseCommand
   /// <returns>Current command.</returns>
   public MultiActionCommand StartWith(StepAction action)
   {
-    this.ThrowOnCommandAlreadyStarted();
+    if (this.HasStart)
+      throw new CommandStartedException("Command already started");
 
-    this._stepActions = new List<StepAction> { action };
+    this.HasStart = true;
+
+    this._stepActions.Add(action);
 
     return this;
   }
@@ -32,9 +50,6 @@ public class MultiActionCommand : BaseCommand
   /// <returns>Current command.</returns>
   public MultiActionCommand Then(StepAction action)
   {
-    this.ThrowOnCommandNotStarted();
-    this.ThrowOnCommandIsCompleted();
-    
     this._stepActions.Add(action);
 
     return this;
@@ -48,9 +63,6 @@ public class MultiActionCommand : BaseCommand
   /// <returns>Current command.</returns>
   public MultiActionCommand ThenOnCondition(StepAction stepAction, Func<UserContext, CommandArgs, bool> condition)
   {
-    this.ThrowOnCommandNotStarted();
-    this.ThrowOnCommandIsCompleted();
-    
     this._stepActions.Add((context, args) =>
     {
       if (condition(context, args))
@@ -61,14 +73,14 @@ public class MultiActionCommand : BaseCommand
   }
 
   /// <summary>
-  /// Complete command after action.
+  /// End command after action.
   /// </summary>
   /// <param name="stepAction">Action to execute.</param>
   /// <returns>Current command.</returns>
-  public MultiActionCommand CompleteAfter(StepAction stepAction)
+  public MultiActionCommand EndAfter(StepAction stepAction)
   {
-    this.ThrowOnCommandNotStarted();
-    this.ThrowOnCommandIsCompleted();
+    if (this.HasEnd)
+      throw new CommandEndedException("Command already ended");
 
     this._stepActions.Add((context, args) =>
     {
@@ -76,54 +88,28 @@ public class MultiActionCommand : BaseCommand
       this.IsCompleted = true;
     });
 
+    this.HasEnd = true;
+    
     return this;
   }
   
   /// <summary>
-  /// Complete command.
+  /// End command.
   /// </summary>
   /// <returns>Current command.</returns>
-  public MultiActionCommand Complete()
+  public MultiActionCommand End()
   {
-    this.ThrowOnCommandNotStarted();
-    this.ThrowOnCommandIsCompleted();
+    if (this.HasEnd)
+      throw new CommandEndedException("Command already ended");
 
     this._stepActions.Add((_, _) =>
     {
       this.IsCompleted = true;
     });
     
+    this.HasEnd = true;
+    
     return this;
-  }
-
-  /// <summary>
-  /// Throws exception if command not started.
-  /// </summary>
-  /// <exception cref="InvalidOperationException">Throws if command not started with <see cref="StartWith"/>.</exception>
-  private void ThrowOnCommandNotStarted()
-  {
-    if (this._stepActions == null)
-      throw new InvalidOperationException($"Use {nameof(StartWith)} to start the command");
-  }
-
-  /// <summary>
-  /// Throws exception if command already started.
-  /// </summary>
-  /// <exception cref="InvalidOperationException">Throws if command already started with <see cref="StartWith"/>.</exception>
-  private void ThrowOnCommandAlreadyStarted()
-  {
-    if (this._stepActions != null)
-      throw new InvalidOperationException("Command already started");
-  }
-  
-  /// <summary>
-  /// Throws exception if command already completed.
-  /// </summary>
-  /// <exception cref="InvalidOperationException">Throws if command completed.</exception>
-  private void ThrowOnCommandIsCompleted()
-  {
-    if (this.IsCompleted)
-      throw new InvalidOperationException("Command is already completed");
   }
 
   #endregion
@@ -134,7 +120,10 @@ public class MultiActionCommand : BaseCommand
   /// Constructor.
   /// </summary>
   /// <param name="commandName">Name of command.</param>
-  public MultiActionCommand(string commandName) : base(commandName) { }
+  public MultiActionCommand(string commandName) : base(commandName)
+  {
+    this._stepActions = new List<StepAction>();
+  }
 
   #endregion
 }

@@ -1,4 +1,6 @@
-﻿using BotCommon.Commands;
+﻿using System;
+using BotCommon.Commands;
+using BotCommon.Commands.Exceptions;
 using BotCommon.UserContexts;
 using Moq;
 using NUnit.Framework;
@@ -11,6 +13,8 @@ namespace BotCommon.Tests.CommandTests;
 public class MultiActionCommandTests
 {
   private Mock<ITelegramBotClient> _clientMock;
+  
+  private const string TestCommandName = "/test";
 
   [OneTimeSetUp]
   public void OneTimeSetUp()
@@ -26,10 +30,10 @@ public class MultiActionCommandTests
     bool startActionCalled = false;
     bool thenAction1Called = false;
     bool thenAction2Called = false;
-    var command = new MultiActionCommand("/test")
+    var command = new MultiActionCommand(TestCommandName)
       .StartWith((_, _) => startActionCalled = true)
       .Then((_, _) => thenAction1Called = true)
-      .CompleteAfter((_, _) => thenAction2Called = true);
+      .EndAfter((_, _) => thenAction2Called = true);
     
     command.ExecuteCommand(userContext, args);
     command.ExecuteCommand(userContext, args);
@@ -49,10 +53,10 @@ public class MultiActionCommandTests
     var userContext = new UserContext((long)11);
     bool startActionCalled = false;
     bool thenAction1Called = false;
-    var command = new MultiActionCommand("/test")
+    var command = new MultiActionCommand(TestCommandName)
       .StartWith((_, _) => startActionCalled = true)
       .Then((_, _) => thenAction1Called = true)
-      .CompleteAfter(null);
+      .EndAfter(null);
     
     command.ExecuteCommand(userContext, args);
     command.ExecuteCommand(userContext, args);
@@ -63,6 +67,60 @@ public class MultiActionCommandTests
       Assert.That(command.IsCompleted, Is.False);      
     });
   }
+
+  [Test]
+  public void MultiActionCommand_CreateCommand_EmptyCommandName_ThrowsException()
+  {
+    Assert.Throws<ArgumentNullException>(() =>
+    {
+      _ = new MultiActionCommand(string.Empty);
+    });
+  }
+
+  [Test]
+  public void MultiActionCommand_CreateCommand_NullCommandName_ThrowsException()
+  {
+    Assert.Throws<ArgumentNullException>(() =>
+    {
+      _ = new MultiActionCommand(null);
+    });
+  }
   
+  [Test]
+  public void MultiActionCommand_BuildCommand_TwiceStarted_ThrowsException()
+  {
+    Assert.Throws<CommandStartedException>(() =>
+    {
+      _ = new MultiActionCommand(TestCommandName)
+        .StartWith(null)
+        .StartWith(null);
+    });
+  }
   
+  [Test]
+  public void MultiActionCommand_BuildCommand_TwiceCompleted_ThrowsException()
+  {
+    Assert.Throws<CommandEndedException>(() =>
+    {
+      _ = new MultiActionCommand(TestCommandName)
+        .StartWith(null)
+        .Then(null)
+        .End()
+        .End();
+    });
+  }
+  
+    
+  [Test]
+  public void MultiActionCommand_BuildCommand_CompletedWithAction_ThrowsException()
+  {
+    Assert.Throws<CommandEndedException>(() =>
+    {
+      _ = new MultiActionCommand(TestCommandName)
+        .StartWith(null)
+        .Then(null)
+        .End()
+        .EndAfter(null);
+    });
+  }
 }
