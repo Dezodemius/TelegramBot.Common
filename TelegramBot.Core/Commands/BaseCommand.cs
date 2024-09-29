@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BotCommon.UserContexts;
 
@@ -24,12 +25,12 @@ public abstract class BaseCommand
   /// <summary>
   /// Command step action type.
   /// </summary>
-  public delegate void StepAction(CommandArgs args);
+  public delegate void StepAction(UserContext context, CommandArgs args);
   
   /// <summary>
   /// Steps of the command.
   /// </summary>
-  protected ICollection<StepAction> _stepActions;
+  protected IList<StepAction> _stepActions;
 
   #endregion
 
@@ -38,7 +39,10 @@ public abstract class BaseCommand
   public void ExecuteCommand(UserContext context, CommandArgs args)
   {
     var currentStepIndex = context.CurrentCommandIndex;
-    this._stepActions.ElementAt(currentStepIndex)(args);
+    var actionToExecute = this._stepActions.ElementAt(currentStepIndex);
+    actionToExecute?.Invoke(context, args);
+    
+    context.CurrentCommandIndex++;
   }
 
   #endregion
@@ -51,6 +55,9 @@ public abstract class BaseCommand
   /// <param name="commandName">Name of command.</param>
   protected BaseCommand(string commandName)
   {
+    if (string.IsNullOrEmpty(commandName))
+      throw new ArgumentNullException(nameof(commandName));
+
     this.CommandName = commandName;
   }
 

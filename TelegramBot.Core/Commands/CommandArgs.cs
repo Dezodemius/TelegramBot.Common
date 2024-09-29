@@ -1,11 +1,12 @@
 ﻿using Telegram.Bot;
+using Telegram.Bot.Types;
 
 namespace BotCommon.Commands;
 
 /// <summary>
 /// Command arguments.
 /// </summary>
-public class CommandArgs
+public struct CommandArgs
 {
   #region Fields and props
 
@@ -28,7 +29,8 @@ public class CommandArgs
   /// </summary>
   /// <param name="chatId">Bot user ID.</param>
   /// <param name="botClient">Telegram bot client.</param>
-  public CommandArgs(long chatId, ITelegramBotClient botClient)
+  /// <param name="update">Bot message update.</param>
+  public CommandArgs(long chatId, ITelegramBotClient botClient, Update update)
   {
     this.ChatId = chatId;
     this.BotClient = botClient;

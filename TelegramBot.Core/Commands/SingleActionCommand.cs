@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using BotCommon.Commands.Exceptions;
 
 namespace BotCommon.Commands;
 
@@ -19,7 +20,7 @@ public class SingleActionCommand : BaseCommand
   {
     this.ThrowIfSingleActionAlreadyAdded();
     
-    this._stepActions.Add(action);
+    this._stepActions[0] = action;
 
     return this;
   }
@@ -30,8 +31,8 @@ public class SingleActionCommand : BaseCommand
   /// <exception cref="InvalidOperationException">Throws if some action already added.</exception>
   private void ThrowIfSingleActionAlreadyAdded()
   {
-    if (this._stepActions.First() != null)
-      throw new InvalidOperationException();
+    if (this._stepActions.Any())
+      throw new SingleActionCommandStartedException("Command cannot have more than one action.");
   }
 
   #endregion

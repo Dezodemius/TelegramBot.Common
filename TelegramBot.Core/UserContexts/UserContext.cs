@@ -23,7 +23,7 @@ public class UserContext
   /// <summary>
   /// Current index of command action.
   /// </summary>
-  public int CurrentCommandIndex { get; private set; }
+  public int CurrentCommandIndex { get; set; }
 
   /// <summary>
   /// User context parameters.
@@ -37,7 +37,7 @@ public class UserContext
 
   #endregion
 
-  #region MyRegion
+  #region Constructors
 
   /// <summary>
   /// Constructor.
