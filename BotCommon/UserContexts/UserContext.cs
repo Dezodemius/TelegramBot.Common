@@ -37,7 +37,7 @@ public class UserContext
 
   #endregion
 
-  #region MyRegion
+  #region Constructors
 
   /// <summary>
   /// Constructor.
