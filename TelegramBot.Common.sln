@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.Core", "TelegramBot.Core\TelegramBot.Core.csproj", "{7960D7FA-0FF7-4475-ABEC-C4F290112978}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotCommon.Tests", "BotCommon.Tests\BotCommon.Tests.csproj", "{28F39EE4-7783-4649-B9EC-6B207D8DEE05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.Core.Tests", "TelegramBot.Core.Tests\TelegramBot.Core.Tests.csproj", "{28F39EE4-7783-4649-B9EC-6B207D8DEE05}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotWorkerService", "BotWorkerService\BotWorkerService.csproj", "{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}"
 EndProject
