@@ -4,10 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.Core", "Telegra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBot.Core.Tests", "TelegramBot.Core.Tests\TelegramBot.Core.Tests.csproj", "{28F39EE4-7783-4649-B9EC-6B207D8DEE05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotWorkerService", "BotWorkerService\BotWorkerService.csproj", "{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRunner", "TestRunner\TestRunner.csproj", "{F31BE2DA-D6DD-43C5-862D-8FB9CB7A25FD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,13 +18,5 @@ Global
 		{28F39EE4-7783-4649-B9EC-6B207D8DEE05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28F39EE4-7783-4649-B9EC-6B207D8DEE05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28F39EE4-7783-4649-B9EC-6B207D8DEE05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC8C98B7-0CDC-4B7B-A935-0A29E643A0D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F31BE2DA-D6DD-43C5-862D-8FB9CB7A25FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F31BE2DA-D6DD-43C5-862D-8FB9CB7A25FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F31BE2DA-D6DD-43C5-862D-8FB9CB7A25FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F31BE2DA-D6DD-43C5-862D-8FB9CB7A25FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
