@@ -19,6 +19,11 @@ public struct CommandArgs
   /// Current telegram bot client.
   /// </summary>
   public ITelegramBotClient BotClient { get; }
+  
+  /// <summary>
+  /// Current update.
+  /// </summary>
+  public Update Update { get; }
 
   #endregion
 
@@ -34,6 +39,7 @@ public struct CommandArgs
   {
     ChatId = chatId;
     BotClient = botClient;
+    Update = update;
   }
 
   #endregion
