@@ -18,9 +18,9 @@ public class SingleActionCommand : BaseCommand
   /// <returns>Current command.</returns>
   public SingleActionCommand PerformWith(StepAction action)
   {
-    this.ThrowIfSingleActionAlreadyAdded();
+    ThrowIfSingleActionAlreadyAdded();
     
-    this._stepActions[0] = action;
+    _stepActions[0] = action;
 
     return this;
   }
@@ -31,7 +31,7 @@ public class SingleActionCommand : BaseCommand
   /// <exception cref="InvalidOperationException">Throws if some action already added.</exception>
   private void ThrowIfSingleActionAlreadyAdded()
   {
-    if (this._stepActions.Any())
+    if (_stepActions.Any())
       throw new SingleActionCommandStartedException("Command cannot have more than one action.");
   }
 
@@ -45,7 +45,7 @@ public class SingleActionCommand : BaseCommand
   /// <param name="commandName">Name of command.</param>
   public SingleActionCommand(string commandName) : base(commandName)
   {
-    this._stepActions = new StepAction[1];
+    _stepActions = new StepAction[1];
   }
 
   #endregion

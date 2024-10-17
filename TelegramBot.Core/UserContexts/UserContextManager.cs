@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Telegram.Bot.Types;
 
 namespace BotCommon.UserContexts;
 
@@ -12,7 +13,7 @@ public class UserContextManager
   /// <summary>
   /// User contexts.
   /// </summary>
-  private readonly Dictionary<long, UserContexts.UserContext> _userContexts = new();
+  private readonly Dictionary<User, UserContext> _userContexts = new();
 
   #endregion
 
@@ -23,19 +24,19 @@ public class UserContextManager
   /// </summary>
   /// <param name="userId">Bot user ID.</param>
   /// <returns>Created or found user context.</returns>
-  public UserContexts.UserContext GetOrCreateUserContext(long userId)
+  public UserContext GetOrCreateUserContext(User user)
   {
-    if (!_userContexts.ContainsKey(userId)) _userContexts[userId] = new UserContexts.UserContext(userId);
-    return _userContexts[userId];
+    if (!_userContexts.ContainsKey(user)) _userContexts[user] = new UserContext(user);
+    return _userContexts[user];
   }
 
   /// <summary>
   /// Remove user context.
   /// </summary>
-  /// <param name="userId">Bot user ID.</param>
-  public void RemoveUserContext(long userId)
+  /// <param name="user">Bot user.</param>
+  public void RemoveUserContext(User user)
   {
-    if (_userContexts.ContainsKey(userId)) _userContexts.Remove(userId);
+    if (_userContexts.ContainsKey(user)) _userContexts.Remove(user);
   }
 
   #endregion

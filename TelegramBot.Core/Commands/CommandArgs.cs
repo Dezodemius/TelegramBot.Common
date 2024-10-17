@@ -32,8 +32,8 @@ public struct CommandArgs
   /// <param name="update">Bot message update.</param>
   public CommandArgs(long chatId, ITelegramBotClient botClient, Update update)
   {
-    this.ChatId = chatId;
-    this.BotClient = botClient;
+    ChatId = chatId;
+    BotClient = botClient;
   }
 
   #endregion

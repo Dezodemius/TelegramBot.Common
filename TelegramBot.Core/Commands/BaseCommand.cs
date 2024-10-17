@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using BotCommon.UserContexts;
 
 namespace BotCommon.Commands;
@@ -36,10 +38,12 @@ public abstract class BaseCommand
 
   #region Methods
 
-  public void ExecuteCommand(UserContext context, CommandArgs args)
+  public void ExecuteCommand(UserContext context, CommandArgs args, CancellationToken cancellationToken)
   {
+    cancellationToken.ThrowIfCancellationRequested();
+
     var currentStepIndex = context.CurrentCommandIndex;
-    var actionToExecute = this._stepActions.ElementAt(currentStepIndex);
+    var actionToExecute = _stepActions.ElementAt(currentStepIndex);
     actionToExecute?.Invoke(context, args);
     
     context.CurrentCommandIndex++;
@@ -58,7 +62,7 @@ public abstract class BaseCommand
     if (string.IsNullOrEmpty(commandName))
       throw new ArgumentNullException(nameof(commandName));
 
-    this.CommandName = commandName;
+    CommandName = commandName;
   }
 
   #endregion

@@ -33,12 +33,12 @@ public class MultiActionCommand : BaseCommand
   /// <returns>Current command.</returns>
   public MultiActionCommand StartWith(StepAction action)
   {
-    if (this.HasStart)
+    if (HasStart)
       throw new MultiActionCommandStartedException("Command already started");
 
-    this.HasStart = true;
+    HasStart = true;
 
-    this._stepActions.Add(action);
+    _stepActions.Add(action);
 
     return this;
   }
@@ -50,7 +50,7 @@ public class MultiActionCommand : BaseCommand
   /// <returns>Current command.</returns>
   public MultiActionCommand Then(StepAction action)
   {
-    this._stepActions.Add(action);
+    _stepActions.Add(action);
 
     return this;
   }
@@ -63,7 +63,7 @@ public class MultiActionCommand : BaseCommand
   /// <returns>Current command.</returns>
   public MultiActionCommand ThenOnCondition(StepAction stepAction, Func<UserContext, CommandArgs, bool> condition)
   {
-    this._stepActions.Add((context, args) =>
+    _stepActions.Add((context, args) =>
     {
       if (condition(context, args))
         stepAction(context, args);
@@ -79,16 +79,16 @@ public class MultiActionCommand : BaseCommand
   /// <returns>Current command.</returns>
   public MultiActionCommand EndAfter(StepAction stepAction)
   {
-    if (this.HasEnd)
+    if (HasEnd)
       throw new MultiActionCommandEndedException("Command already ended");
 
-    this._stepActions.Add((context, args) =>
+    _stepActions.Add((context, args) =>
     {
       stepAction(context, args);
-      this.IsCompleted = true;
+      IsCompleted = true;
     });
 
-    this.HasEnd = true;
+    HasEnd = true;
     
     return this;
   }
@@ -99,15 +99,15 @@ public class MultiActionCommand : BaseCommand
   /// <returns>Current command.</returns>
   public MultiActionCommand End()
   {
-    if (this.HasEnd)
+    if (HasEnd)
       throw new MultiActionCommandEndedException("Command already ended");
 
-    this._stepActions.Add((_, _) =>
+    _stepActions.Add((_, _) =>
     {
-      this.IsCompleted = true;
+      IsCompleted = true;
     });
     
-    this.HasEnd = true;
+    HasEnd = true;
     
     return this;
   }
@@ -122,7 +122,7 @@ public class MultiActionCommand : BaseCommand
   /// <param name="commandName">Name of command.</param>
   public MultiActionCommand(string commandName) : base(commandName)
   {
-    this._stepActions = new List<StepAction>();
+    _stepActions = new List<StepAction>();
   }
 
   #endregion

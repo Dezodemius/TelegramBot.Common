@@ -19,13 +19,13 @@ public class MultiActionCommandTests
   [OneTimeSetUp]
   public void OneTimeSetUp()
   {
-    this._clientMock = new Mock<ITelegramBotClient>();
+    _clientMock = new Mock<ITelegramBotClient>();
   }
   
   [Test]
   public void MultiActionCommand_ExecuteCommand_AllActionsCalledAndCommandCompleted()
   {
-    var args = new CommandArgs((long)11, this._clientMock.Object, new Update());
+    var args = new CommandArgs((long)11, _clientMock.Object, new Update());
     var userContext = new UserContext((long)11);
     bool startActionCalled = false;
     bool thenAction1Called = false;
@@ -49,7 +49,7 @@ public class MultiActionCommandTests
   [Test]
   public void MultiActionCommand_ExecuteCommand_AllActionsCalledAndCommandNotCompleted()
   {
-    var args = new CommandArgs((long)11, this._clientMock.Object, new Update());
+    var args = new CommandArgs((long)11, _clientMock.Object, new Update());
     var userContext = new UserContext((long)11);
     bool startActionCalled = false;
     bool thenAction1Called = false;

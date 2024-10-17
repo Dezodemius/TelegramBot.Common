@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BotCommon.Commands;
+using Telegram.Bot.Types;
 
 namespace BotCommon.UserContexts;
 
@@ -11,9 +12,9 @@ public class UserContext
   #region Fields and props
 
   /// <summary>
-  /// Bot user ID.
+  /// Bot user.
   /// </summary>
-  public long UserId { get; }
+  public User User { get; }
 
   /// <summary>
   /// Bot command context.
@@ -42,10 +43,10 @@ public class UserContext
   /// <summary>
   /// Constructor.
   /// </summary>
-  /// <param name="userId">Bot user ID.</param>
-  public UserContext(long userId)
+  /// <param name="user">Bot user.</param>
+  public UserContext(User user)
   {
-    UserId = userId;
+    User = user;
   }
   
   #endregion
